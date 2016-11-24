@@ -5,12 +5,13 @@ FROM ynop/centos_supervisor
 #
 RUN yum -y install openssh-server openssh-clients
 
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
-    sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
-
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' 
 
-EXPOSE 22
+ADD sshd_config /etc/ssh/sshd_config
+
+EXPOSE 55522
+
+RUN echo "root:root" | chpasswd
 
 #
 #	SUPERVISOR
