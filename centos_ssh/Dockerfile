@@ -3,7 +3,7 @@ FROM ynop/centos_supervisor
 #
 #	SSH
 #
-RUN yum -y install openssh-server openssh-clients
+RUN yum -y install openssh-server openssh-clients screen
 
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' 
 
@@ -17,3 +17,8 @@ RUN echo "root:root" | chpasswd
 #	SUPERVISOR
 #
 ADD supervisord.conf /etc/supervisord.conf
+
+#
+#
+#
+RUN yum clean all 
